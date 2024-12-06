@@ -17,3 +17,9 @@ class SnakeGame extends Application:
   var score = 0
   var frameCounter = 0
   val UpdateInterval = 8
+
+  def generateFood(): Point =
+    var foodPoint = new Point(Random.nextInt(Cols), Random.nextInt(Rows))
+    while snake.exists(p => p.x == foodPoint.x && p.y == foodPoint.y) do
+      foodPoint = new Point(Random.nextInt(Cols), Random.nextInt(Rows))
+    foodPoint
