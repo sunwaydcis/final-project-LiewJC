@@ -23,3 +23,15 @@ class SnakeGame extends Application:
     while snake.exists(p => p.x == foodPoint.x && p.y == foodPoint.y) do
       foodPoint = new Point(Random.nextInt(Cols), Random.nextInt(Rows))
     foodPoint
+
+  override def start(primaryStage: Stage): Unit =
+      primaryStage.setTitle("Snake Game - Score: " + score.toString)
+      val root = new StackPane()
+      val canvas = new Canvas(Width, Height)
+      val gc = canvas.getGraphicsContext2D()
+      root.getChildren().add(canvas)
+  
+      val scene = new Scene(root)
+      primaryStage.setScene(scene)
+  
+      primaryStage.show()
