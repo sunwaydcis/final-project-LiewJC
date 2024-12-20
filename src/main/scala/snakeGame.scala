@@ -61,3 +61,20 @@ class SnakeGame extends Application:
     }
     timer.start()
     primaryStage.show()
+
+    def update(): Unit =
+    val head = snake.head
+    val newHead = new Point(
+      (head.x + direction.x + Cols) % Cols,
+      (head.y + direction.y + Rows) % Rows
+    )
+
+    if snake.exists(p => p.x == newHead.x && p.y == newHead.y) then
+      gameOver = true
+    else
+      snake.prepend(newHead)
+      if newHead.x == food.x && newHead.y == food.y then
+        food = generateFood()
+        score += 1
+      else
+        snake.remove(snake.length - 1)
