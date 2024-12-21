@@ -78,3 +78,26 @@ class SnakeGame extends Application:
         score += 1
       else
         snake.remove(snake.length - 1)
+
+    def draw(gc: javafx.scene.canvas.GraphicsContext): Unit =
+      // Clear background
+      gc.setFill(Color.BLACK)
+      gc.fillRect(0, 0, Width, Height)
+    
+      // Draw snake
+      gc.setFill(Color.GREEN)
+      snake.foreach(p =>
+        gc.fillRect(p.x * CellSize, p.y * CellSize, CellSize - 1, CellSize - 1)
+      )
+  
+      // Draw food
+      gc.setFill(Color.RED)
+      gc.fillRect(food.x * CellSize, food.y * CellSize, CellSize - 1, CellSize - 1)
+  
+      // Draw game over
+      if gameOver then
+        gc.setFill(Color.WHITE)
+        gc.setTextAlign(javafx.scene.text.TextAlignment.CENTER)
+        gc.setFont(javafx.scene.text.Font.font(30))
+        gc.fillText("Game Over! Score: " + score.toString, Width/2, Height/2)
+        gc.fillText("Press Space to restart", Width/2, Height/2 + 40)
